@@ -2,17 +2,22 @@ package com.example.profileonosu.api
 
 import androidx.constraintlayout.widget.Group
 import com.example.profileonosu.api.token.GetTokenRequest
+import com.example.profileonosu.api.token.GetUserRequest
 import com.example.profileonosu.api.token.Token
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
+import com.example.profileonosu.api.token.UserInfo
+import retrofit2.http.*
 
 interface ApiOsu {
     @POST("oauth/token")
     suspend fun requestToken (
         @Body getTokenRequest: GetTokenRequest
     ): Token
+
+    @GET("api/v2/users/{user}/osu")
+    suspend fun requestUser (
+        @Header("Authorization") token: String,
+        @Body getUserRequest: GetUserRequest,
+    ): UserInfo
 
 
 
