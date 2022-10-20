@@ -37,7 +37,7 @@ jobs:
       
     - name: Clean up build artifact
       run: |
-        ls build/apk
+        ls build
         set -e
         mv build/apk/app-release-unsigned.apk OsuProfile.apk
 
