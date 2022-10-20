@@ -26,6 +26,9 @@ jobs:
         
     - name: Setup Kotlin
       uses: fwilhe2/setup-kotlin@0.2.0
+      
+    - name: Run chmod to make gradlew executable
+      run: chmod +x ./gradlew
 
     - name: Build app and run unit tests
       uses: gradle/gradle-command-action@v2
@@ -44,8 +47,7 @@ jobs:
     - name: Create Release
       uses: softprops/action-gh-release@v1
       with:
-        tag_name: ${{ env.VERSION_TAG }}
-        name: OsuProfile ${{ env.VERSION_TAG }}
+        name: OsuProfile
         body: Cringe
         files: |
           OsuProfile.apk
