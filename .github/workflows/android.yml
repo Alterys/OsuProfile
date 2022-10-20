@@ -38,7 +38,7 @@ jobs:
     - name: Clean up build artifact
       run: |
         set -e
-        mv build/apk/app-release-unsigned.apk OsuProfile.apk
+        mv /home/runner/work/OsuProfile/OsuProfile/build/apk/app-release-unsigned.apk OsuProfile.apk
 
     - name: Create Release
       uses: softprops/action-gh-release@v1
