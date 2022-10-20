@@ -1,0 +1,46 @@
+name: Android CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Clone repo
+      uses: actions/checkout@v3
+      
+    - name: Validate Gradle Wrapper
+      uses: gradle/wrapper-validation-action@v1
+      
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: 11
+        distribution: adopt
+
+    - name: Build app
+      uses: gradle/gradle-command-action@v2
+      with:
+        arguments: assembleStandardRelease
+
+    - name: Create Release
+      if: startsWith(github.ref, 'refs/tags/') && github.repository == 'EnergoStlin/OsuProfile'
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ env.VERSION_TAG }}
+        name: OsuProfile ${{ env.VERSION_TAG }}
+        body: Cringe
+        files: |
+          OsuProfile-${{ env.VERSION_TAG }}.apk
+          OsuProfile-arm64-v8a-${{ env.VERSION_TAG }}.apk
+          OsuProfile-armeabi-v7a-${{ env.VERSION_TAG }}.apk
+          OsuProfile-x86-${{ env.VERSION_TAG }}.apk
+          OsuProfile-x86_64-${{ env.VERSION_TAG }}.apk
+        draft: true
+        prerelease: false
