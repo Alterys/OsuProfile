@@ -39,7 +39,7 @@ jobs:
       run: |
         ls build/kotlin
         set -e
-        mv build/apk/app-release-unsigned.apk OsuProfile.apk
+        mv app/build/outputs/apk/release/app-release-unsigned.apk OsuProfile.apk
 
     - name: Create Release
       uses: softprops/action-gh-release@v1
