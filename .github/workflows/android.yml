@@ -30,10 +30,10 @@ jobs:
     - name: Run chmod to make gradlew executable
       run: chmod +x ./gradlew
 
-    - name: Build app and run unit tests
+    - name: Build app
       uses: gradle/gradle-command-action@v2
       with:
-        arguments: assembleStandardRelease
+        arguments: build
       
     - name: Clean up build artifact
       run: |
