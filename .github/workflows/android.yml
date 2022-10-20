@@ -38,11 +38,7 @@ jobs:
     - name: Clean up build artifact
       run: |
         set -e
-        mv app/build/outputs/apk/standard/release/app-standard-universal-release-unsigned-signed.apk OsuProfile.apk
-        cp app/build/outputs/apk/standard/release/app-standard-arm64-v8a-release-unsigned-signed.apk OsuProfile-arm64-v8a.apk
-        cp app/build/outputs/apk/standard/release/app-standard-armeabi-v7a-release-unsigned-signed.apk OsuProfile-armeabi-v7a-.apk
-        cp app/build/outputs/apk/standard/release/app-standard-x86-release-unsigned-signed.apk OsuProfile-x86.apk
-        cp app/build/outputs/apk/standard/release/app-standard-x86_64-release-unsigned-signed.apk OsuProfile-x86_64.apk
+        mv build/apk/app-release-unsigned.apk OsuProfile.apk
 
     - name: Create Release
       uses: softprops/action-gh-release@v1
@@ -51,9 +47,5 @@ jobs:
         body: Cringe
         files: |
           OsuProfile.apk
-          OsuProfile-arm64-v8a.apk
-          OsuProfile-armeabi-v7a.apk
-          OsuProfile-x86.apk
-          OsuProfile-x86_64.apk
         draft: true
         prerelease: false
