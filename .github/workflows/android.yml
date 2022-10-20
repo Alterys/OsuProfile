@@ -24,10 +24,8 @@ jobs:
         java-version: 11
         distribution: adopt
 
-    - name: Build app
-      uses: gradle/gradle-command-action@v2
-      with:
-        arguments: assembleStandardRelease
+    - name: Gradle Build Action
+      uses: gradle/gradle-build-action@v2.3.
 
     - name: Create Release
       if: startsWith(github.ref, 'refs/tags/') && github.repository == 'EnergoStlin/OsuProfile'
