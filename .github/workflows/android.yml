@@ -27,21 +27,31 @@ jobs:
     - name: Setup Kotlin
       uses: fwilhe2/setup-kotlin@0.2.0
 
-    - name: Gradle Build Action
-      uses: gradle/gradle-build-action@v2.3.2
+    - name: Build app and run unit tests
+      uses: gradle/gradle-command-action@v2
+      with:
+        arguments: assembleStandardRelease
+      
+    - name: Clean up build artifact
+      run: |
+        set -e
+        mv app/build/outputs/apk/standard/release/app-standard-universal-release-unsigned-signed.apk OsuProfile.apk
+        cp app/build/outputs/apk/standard/release/app-standard-arm64-v8a-release-unsigned-signed.apk OsuProfile-arm64-v8a.apk
+        cp app/build/outputs/apk/standard/release/app-standard-armeabi-v7a-release-unsigned-signed.apk OsuProfile-armeabi-v7a-.apk
+        cp app/build/outputs/apk/standard/release/app-standard-x86-release-unsigned-signed.apk OsuProfile-x86.apk
+        cp app/build/outputs/apk/standard/release/app-standard-x86_64-release-unsigned-signed.apk OsuProfile-x86_64.apk
 
     - name: Create Release
-      if: startsWith(github.ref, 'refs/tags/') && github.repository == 'EnergoStlin/OsuProfile'
       uses: softprops/action-gh-release@v1
       with:
         tag_name: ${{ env.VERSION_TAG }}
         name: OsuProfile ${{ env.VERSION_TAG }}
         body: Cringe
         files: |
-          OsuProfile-${{ env.VERSION_TAG }}.apk
-          OsuProfile-arm64-v8a-${{ env.VERSION_TAG }}.apk
-          OsuProfile-armeabi-v7a-${{ env.VERSION_TAG }}.apk
-          OsuProfile-x86-${{ env.VERSION_TAG }}.apk
-          OsuProfile-x86_64-${{ env.VERSION_TAG }}.apk
+          OsuProfile.apk
+          OsuProfile-arm64-v8a.apk
+          OsuProfile-armeabi-v7a.apk
+          OsuProfile-x86.apk
+          OsuProfile-x86_64.apk
         draft: true
         prerelease: false
