@@ -2,7 +2,6 @@ package com.example.profileonosu.fragment
 
 import android.os.Bundle
 import android.util.Log
-import android.util.Log.DEBUG
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.profileonosu.R
 import com.example.profileonosu.api.ApiOsu
 import com.example.profileonosu.api.token.GetTokenRequest
-import com.example.profileonosu.api.token.GetUserRequest
 import com.example.profileonosu.api.token.Token
 import com.example.profileonosu.common.Constant.BASE_URL
 import com.example.profileonosu.databinding.FragmentEndBinding
@@ -45,46 +43,60 @@ open class EndFragment : Fragment() {
             super.onViewCreated(view, savedInstanceState)
             binding = FragmentEndBinding.bind(view)
 
+            val nickname = arguments?.getString("MyArg")
+
+
+            osuApi().requestToken(GetTokenRequest(
+                "18123",
+                "PMVb6QP4BlfCACeuquYJbq1afbCiGY7Jo6rcrO35",
+                "client_credentials",
+                "public"
+            )).enqueue(object : Callback<Token> {
+                override fun onFailure(call: Call<Token>, t: Throwable) {
+                    Log.e("[err]", t.toString())
+                }
+
+                override fun onResponse(
+                    call: Call<Token>,
+                    response: Response<Token>
+                ) {
+                    response.body()?.let {
+
+                        val usernameResult = osuApi()
+                            .requestUser(it.accessToken, nickname?:return).username
+
+                        val pp = osuApi()
+                            .requestUser(it.accessToken, nickname).pp
+
+                        val globalRank = osuApi()
+                            .requestUser(it.accessToken, nickname).globalRank
+
+                        val countryCode = osuApi()
+                            .requestUser(it.accessToken, nickname).countryCode
+
+                        binding.userName.text = usernameResult
+                        binding.performance.text = pp
+                        binding.globalRank.text = globalRank
+                        binding.country.text = countryCode
+
+                        Log.d("Osu Token",
+                            it.accessToken
+                        )
+                    }
+                }
+            })
+
+
+
+
 
 
             binding.back.setOnClickListener {
                 findNavController().navigate(R.id.action_endFragment_to_startFragment)
             }
-
-            val nickname = arguments?.getString("MyArg")
-
-
-
-
-            GetUserRequest(
-                "$nickname"
-            )
-
         }
 
-    suspend fun nigger(){
-        osuApi().requestToken(GetTokenRequest(
-            "18123",
-            "PMVb6QP4BlfCACeuquYJbq1afbCiGY7Jo6rcrO35",
-            "client_credentials",
-            "public"
-        )).enqueue(object : Callback<Token> {
-            override fun onFailure(call: Call<Token>, t: Throwable) {
-                Log.e("[err]", t.toString())
-            }
 
-            override fun onResponse(
-                call: Call<Token>,
-                response: Response<Token>
-            ) {
-                response.body()?.let {
-                    Log.d("Osu Token",
-                        it.accessToken
-                    )
-                }
-            }
-        })
-    }
 }
 
 

@@ -6,4 +6,7 @@
     <string name="back">Back</string>
     <string name="test">TextView</string>
     <string name="username">username</string>
+    <string name="performance">pp</string>
+    <string name="globalRank">globalRank</string>
+    <string name="country">country</string>
 </resources>
