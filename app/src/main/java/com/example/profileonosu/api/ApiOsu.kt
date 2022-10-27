@@ -16,7 +16,7 @@ interface ApiOsu {
     fun requestUser (
         @Header("Authorization") token: String,
         @Path("user") user: String
-    ): UserInfo
+    ): Call<UserInfo>
 
     @GET("/api/v2/users/{id}/scores/best")
     fun requestScores (

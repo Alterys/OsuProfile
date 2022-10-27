@@ -1,6 +1,7 @@
 package com.example.profileonosu.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import com.example.profileonosu.databinding.FragmentStartBinding
 
 
 open class StartFragment : Fragment() {
+
     private lateinit var binding: FragmentStartBinding
 
     override fun onCreateView(
@@ -31,6 +33,9 @@ open class StartFragment : Fragment() {
             bundle.putString("MyArg", name.toString())
             findNavController().navigate(R.id.action_startFragment_to_endFragment, bundle)
         }
+
+
+
     }
 }
 

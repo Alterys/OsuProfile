@@ -2,6 +2,7 @@ package com.example.profileonosu
 
 import android.content.pm.ActivityInfo
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 
 
@@ -11,5 +12,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
         setContentView(R.layout.activity_main)
+
     }
 }

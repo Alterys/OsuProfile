@@ -11,8 +11,10 @@ import com.example.profileonosu.R
 import com.example.profileonosu.api.ApiOsu
 import com.example.profileonosu.api.token.GetTokenRequest
 import com.example.profileonosu.api.token.Token
+import com.example.profileonosu.api.token.UserInfo
 import com.example.profileonosu.common.Constant.BASE_URL
 import com.example.profileonosu.databinding.FragmentEndBinding
+import kotlinx.coroutines.flow.callbackFlow
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -22,9 +24,16 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 open class EndFragment : Fragment() {
 
-        private lateinit var binding: FragmentEndBinding
+    var token: String? = null
+    var username: String? = null
+    var performancePoints: String? = null
+    var globalRank: String? = null
+    var country: String? = null
 
-        private fun osuApi(): ApiOsu =
+
+    private lateinit var binding: FragmentEndBinding
+
+    private fun osuApi(): ApiOsu =
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -42,53 +51,7 @@ open class EndFragment : Fragment() {
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
             binding = FragmentEndBinding.bind(view)
-
-            val nickname = arguments?.getString("MyArg")
-
-
-            osuApi().requestToken(GetTokenRequest(
-                "18123",
-                "PMVb6QP4BlfCACeuquYJbq1afbCiGY7Jo6rcrO35",
-                "client_credentials",
-                "public"
-            )).enqueue(object : Callback<Token> {
-                override fun onFailure(call: Call<Token>, t: Throwable) {
-                    Log.e("[err]", t.toString())
-                }
-
-                override fun onResponse(
-                    call: Call<Token>,
-                    response: Response<Token>
-                ) {
-                    response.body()?.let {
-
-                        val usernameResult = osuApi()
-                            .requestUser(it.accessToken, nickname?:return).username
-
-                        val pp = osuApi()
-                            .requestUser(it.accessToken, nickname).pp
-
-                        val globalRank = osuApi()
-                            .requestUser(it.accessToken, nickname).globalRank
-
-                        val countryCode = osuApi()
-                            .requestUser(it.accessToken, nickname).countryCode
-
-                        binding.userName.text = usernameResult
-                        binding.performance.text = pp
-                        binding.globalRank.text = globalRank
-                        binding.country.text = countryCode
-
-                        Log.d("Osu Token",
-                            it.accessToken
-                        )
-                    }
-                }
-            })
-
-
-
-
+            getToken()
 
 
             binding.back.setOnClickListener {
@@ -97,7 +60,64 @@ open class EndFragment : Fragment() {
         }
 
 
+
+    private fun getToken(){
+        Log.d("getToken", "запустилась")
+        osuApi().requestToken(GetTokenRequest(
+            "18123",
+            "PMVb6QP4BlfCACeuquYJbq1afbCiGY7Jo6rcrO35",
+            "client_credentials",
+            "public"
+        )).enqueue(object: Callback<Token> {
+            override fun onFailure(call: Call<Token>, t: Throwable) {
+                Log.e("[err]", t.toString())
+            }
+            override fun onResponse(
+                call: Call<Token>,
+                response: Response<Token>
+            ) {
+                response.body()?.let {
+                Log.d("Osu Token",
+                    it.accessToken)}
+                token = response.body()?.accessToken ?: return
+                getUserInfo()
+            }
+        })
+    }
+
+    private fun getUserInfo() {
+        Log.d("getUserInfo", "запустилась")
+        val nickname = requireArguments().getString("MyArg")
+        osuApi().requestUser(
+            "$token", "$nickname"
+        ).enqueue(object: Callback<UserInfo> {
+            override fun onFailure(call: Call<UserInfo>, t: Throwable) {
+                Log.e("[err]", t.toString())
+            }
+            override fun onResponse(
+                call: Call<UserInfo>,
+                response: Response<UserInfo>
+            ) {
+                    username = response.body()?.username?: return
+                    performancePoints = response.body()?.pp?: return
+                    globalRank = response.body()?.globalRank?: return
+                    country = response.body()?.countryCode?: return
+
+
+
+                    binding.userName.text = username
+                    binding.performance.text = performancePoints
+                    binding.globalRank.text = globalRank
+                    binding.country.text = country
+
+
+
+            }
+        })
+    }
+
 }
+
 
 
 
