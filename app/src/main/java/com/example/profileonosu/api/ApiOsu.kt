@@ -14,7 +14,8 @@ interface ApiOsu {
 
     @GET("api/v2/users/{user}/osu")
     fun requestUser (
-        @Header("Authorization") token: String,
+        @Header("Authorization")token: String,
+        @Header("Accept")accept: String,
         @Path("user") user: String
     ): Call<UserInfo>
 

@@ -98,7 +98,7 @@ open class EndFragment : Fragment() {
         Log.d("getUserInfo", "запустилась")
         val nickname = requireArguments().getString("MyArg")
         osuApi().requestUser(
-            "$tokenType $token", "$nickname"
+            "$tokenType $token","application/json", "$nickname"
         ).enqueue(object: Callback<UserInfo> {
             override fun onFailure(call: Call<UserInfo>, t: Throwable) {
                 Log.e("[err]", t.toString())
@@ -108,6 +108,7 @@ open class EndFragment : Fragment() {
                 response: Response<UserInfo>
             ) {
 
+                Log.d("NEGRISIMO", response.code().toString())
                     username = response.body()?.username?: return
                     performancePoints = response.body()?.pp?: return
                     globalRank = response.body()?.globalRank?: return
