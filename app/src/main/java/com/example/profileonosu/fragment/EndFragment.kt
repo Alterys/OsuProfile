@@ -29,6 +29,7 @@ open class EndFragment : Fragment() {
     var performancePoints: String? = null
     var globalRank: String? = null
     var country: String? = null
+    var tokenType: String? = null
 
 
     private lateinit var binding: FragmentEndBinding
@@ -79,8 +80,16 @@ open class EndFragment : Fragment() {
                 response.body()?.let {
                 Log.d("Osu Token",
                     it.accessToken)}
-                token = response.body()?.accessToken ?: return
+                token = response.body()?.accessToken?: return
+
+                response.body()?.let{
+                Log.d("TOKEN TYPE",
+                    it.tokenType)}
+                tokenType = response.body()?.tokenType?: return
+
+
                 getUserInfo()
+
             }
         })
     }
@@ -89,7 +98,7 @@ open class EndFragment : Fragment() {
         Log.d("getUserInfo", "запустилась")
         val nickname = requireArguments().getString("MyArg")
         osuApi().requestUser(
-            "$token", "$nickname"
+            "$tokenType $token", "$nickname"
         ).enqueue(object: Callback<UserInfo> {
             override fun onFailure(call: Call<UserInfo>, t: Throwable) {
                 Log.e("[err]", t.toString())
@@ -98,20 +107,16 @@ open class EndFragment : Fragment() {
                 call: Call<UserInfo>,
                 response: Response<UserInfo>
             ) {
+
                     username = response.body()?.username?: return
                     performancePoints = response.body()?.pp?: return
                     globalRank = response.body()?.globalRank?: return
                     country = response.body()?.countryCode?: return
 
-
-
                     binding.userName.text = username
                     binding.performance.text = performancePoints
                     binding.globalRank.text = globalRank
                     binding.country.text = country
-
-
-
             }
         })
     }
