@@ -2,7 +2,7 @@ package com.example.profileonosu.api
 
 import com.example.profileonosu.api.token.GetTokenRequest
 import com.example.profileonosu.api.token.Token
-import com.example.profileonosu.api.token.UserInfo
+import com.example.profileonosu.api.userinfo.UserInfo
 import retrofit2.Call
 import retrofit2.http.*
 

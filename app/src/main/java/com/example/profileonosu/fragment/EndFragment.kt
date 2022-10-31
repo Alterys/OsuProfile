@@ -11,10 +11,10 @@ import com.example.profileonosu.R
 import com.example.profileonosu.api.ApiOsu
 import com.example.profileonosu.api.token.GetTokenRequest
 import com.example.profileonosu.api.token.Token
-import com.example.profileonosu.api.token.UserInfo
+import com.example.profileonosu.api.userinfo.UserInfo
 import com.example.profileonosu.common.Constant.BASE_URL
 import com.example.profileonosu.databinding.FragmentEndBinding
-import kotlinx.coroutines.flow.callbackFlow
+import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -30,6 +30,7 @@ open class EndFragment : Fragment() {
     var globalRank: String? = null
     var country: String? = null
     var tokenType: String? = null
+    var avatarUrl: String? = null
 
 
     private lateinit var binding: FragmentEndBinding
@@ -109,15 +110,21 @@ open class EndFragment : Fragment() {
             ) {
 
                 Log.d("NEGRISIMO", response.code().toString())
-                    username = response.body()?.username?: return
-                    performancePoints = response.body()?.pp?: return
-                    globalRank = response.body()?.globalRank?: return
-                    country = response.body()?.countryCode?: return
 
-                    binding.userName.text = username
-                    binding.performance.text = performancePoints
-                    binding.globalRank.text = globalRank
-                    binding.country.text = country
+                Log.d("test2", response.body().toString())
+                globalRank = response.body()?.statistics?.globalRank
+                performancePoints = response.body()?.statistics?.pp
+                username = response.body()?.username
+                country = response.body()?.countryCode
+                avatarUrl = response.body()?.avatarUrl
+
+                binding.userName.append(username)
+                binding.performance.append(performancePoints)
+                binding.globalRank.append(globalRank)
+                binding.country.append(country)
+                Picasso.get().load("$avatarUrl").into(binding.avatar);
+
+
             }
         })
     }
