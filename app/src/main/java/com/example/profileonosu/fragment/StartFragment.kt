@@ -1,7 +1,6 @@
 package com.example.profileonosu.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,9 +32,6 @@ open class StartFragment : Fragment() {
             bundle.putString("MyArg", name.toString())
             findNavController().navigate(R.id.action_startFragment_to_endFragment, bundle)
         }
-
-
-
     }
 }
 

@@ -7,6 +7,7 @@ import com.example.profileonosu.api.userinfo.UserInfo
 import retrofit2.Call
 import retrofit2.http.*
 
+
 interface ApiOsu {
     @POST("oauth/token")
     fun requestToken (

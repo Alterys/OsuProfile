@@ -22,7 +22,6 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-
 open class EndFragment : Fragment() {
 
     var token: String? = null
@@ -33,7 +32,6 @@ open class EndFragment : Fragment() {
     var tokenType: String? = null
     var avatarUrl: String? = null
     var userId: Int? = null
-
 
     private lateinit var binding: FragmentEndBinding
 
@@ -56,17 +54,11 @@ open class EndFragment : Fragment() {
             super.onViewCreated(view, savedInstanceState)
             binding = FragmentEndBinding.bind(view)
             getToken()
-
-
             binding.back.setOnClickListener {
                 findNavController().navigate(R.id.action_endFragment_to_startFragment)
             }
         }
-
-
-
     private fun getToken(){
-        Log.d("getToken", "запустилась")
         osuApi().requestToken(GetTokenRequest(
             "18123",
             "PMVb6QP4BlfCACeuquYJbq1afbCiGY7Jo6rcrO35",
@@ -96,9 +88,7 @@ open class EndFragment : Fragment() {
             }
         })
     }
-
     private fun getUserInfo() {
-        Log.d("getUserInfo", "запустилась")
         val nickname = requireArguments().getString("MyArg")
         osuApi().requestUser(
             "$tokenType $token","application/json", "$nickname"
@@ -110,10 +100,6 @@ open class EndFragment : Fragment() {
                 call: Call<UserInfo>,
                 response: Response<UserInfo>
             ) {
-
-                Log.d("NEGRISIMO", response.code().toString())
-
-                Log.d("test2", response.body().toString())
                 globalRank = response.body()?.statistics?.globalRank
                 performancePoints = response.body()?.statistics?.pp
                 username = response.body()?.username
@@ -130,7 +116,6 @@ open class EndFragment : Fragment() {
             }
         })
     }
-
     private fun getBestScore(){
         Log.d("getBestScore", "запустилась")
         osuApi().requestScores(
@@ -143,8 +128,7 @@ open class EndFragment : Fragment() {
                 call: Call<Scores>,
                 response: Response<Scores>
             ) {
-                var test: Float? = null
-                test = response.body()?.score?.accuracy
+                val test: Float? = response.body()?.score?.accuracy
                 Log.d(
                     "xz testim",
                     "$test"
@@ -152,9 +136,6 @@ open class EndFragment : Fragment() {
             }
         })
     }
-
-
-
 }
 
 

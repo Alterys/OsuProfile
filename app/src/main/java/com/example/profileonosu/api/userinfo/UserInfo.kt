@@ -8,5 +8,4 @@ data class UserInfo (
     @SerializedName("id") val id: Int,
     @SerializedName("avatar_url") val avatarUrl: String,
     @SerializedName("statistics") val statistics: Statistics,
-
 )
