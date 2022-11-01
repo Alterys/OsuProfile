@@ -21,7 +21,7 @@ interface ApiOsu {
         @Path("user") user: String
     ): Call<UserInfo>
 
-    @GET("/api/v2/users/{id}/scores/best")
+    @GET("/api/v2/users/{id}/scores/best?limit=2")
     fun requestScores (
         @Header("Authorization")token: String,
         @Header("Accept")accept: String,

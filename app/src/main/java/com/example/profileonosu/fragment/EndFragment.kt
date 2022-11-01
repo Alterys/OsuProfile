@@ -123,10 +123,10 @@ open class EndFragment : Fragment(){
                 call: Call<Scores>,
                 response: Response<Scores>
             ) {
-               val acc = emptyArray<Score>()
+
                 Log.d(
                     "Test",
-                    "$acc"
+                    response.body().toString()
                 )
             }
         })

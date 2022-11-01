@@ -4,9 +4,8 @@
     <string name="search">search</string>
     <string name="textNickname">enter the player\'s nickname</string>
     <string name="back">Back</string>
-    <string name="test">TextView</string>
-    <string name="username">username:</string>
-    <string name="performance">pp:</string>
-    <string name="country">country:</string>
-    <string name="global_ranking">Global Ranking: </string>
+    <string name="usernameView">Username:</string>
+    <string name="performancePointView">Performance Point:</string>
+    <string name="countryView">Country:</string>
+    <string name="globalRankView">Global Rank:</string>
 </resources>
