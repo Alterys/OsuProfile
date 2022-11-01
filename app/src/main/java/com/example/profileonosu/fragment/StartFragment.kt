@@ -24,7 +24,6 @@ open class StartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentStartBinding.bind(view)
-
         binding.search.setOnClickListener {
             val bundle = Bundle()
             val name = binding.textName.text
