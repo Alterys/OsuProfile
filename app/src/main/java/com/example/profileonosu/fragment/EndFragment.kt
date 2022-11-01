@@ -22,7 +22,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-open class EndFragment : Fragment() {
+open class EndFragment : Fragment(){
 
     var token: String? = null
     var username: String? = null
@@ -49,7 +49,6 @@ open class EndFragment : Fragment() {
         ): View? {
             return inflater.inflate(R.layout.fragment_end, container, false)
         }
-
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
             binding = FragmentEndBinding.bind(view)
@@ -76,19 +75,15 @@ open class EndFragment : Fragment() {
                 Log.d("Osu Token",
                     it.accessToken)}
                 token = response.body()?.accessToken?: return
-
                 response.body()?.let{
                 Log.d("TOKEN TYPE",
                     it.tokenType)}
                 tokenType = response.body()?.tokenType?: return
-
-
                 getUserInfo()
-
             }
         })
     }
-    private fun getUserInfo() {
+    private fun getUserInfo(){
         val nickname = requireArguments().getString("MyArg")
         osuApi().requestUser(
             "$tokenType $token","application/json", "$nickname"
@@ -106,7 +101,6 @@ open class EndFragment : Fragment() {
                 country = response.body()?.countryCode
                 avatarUrl = response.body()?.avatarUrl
                 userId = response.body()?.id
-
                 binding.userName.append(username)
                 binding.performance.append(performancePoints)
                 binding.globalRank.append(globalRank)
@@ -137,8 +131,3 @@ open class EndFragment : Fragment() {
         })
     }
 }
-
-
-
-
-
