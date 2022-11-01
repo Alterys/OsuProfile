@@ -11,6 +11,7 @@ import com.example.profileonosu.R
 import com.example.profileonosu.api.ApiOsu
 import com.example.profileonosu.api.token.GetTokenRequest
 import com.example.profileonosu.api.token.Token
+import com.example.profileonosu.api.userinfo.Score
 import com.example.profileonosu.api.userinfo.Scores
 import com.example.profileonosu.api.userinfo.UserInfo
 import com.example.profileonosu.common.Constant.BASE_URL
@@ -122,10 +123,10 @@ open class EndFragment : Fragment(){
                 call: Call<Scores>,
                 response: Response<Scores>
             ) {
-                val test: Float? = response.body()?.score?.accuracy
+               val acc = emptyArray<Score>()
                 Log.d(
-                    "xz testim",
-                    "$test"
+                    "Test",
+                    "$acc"
                 )
             }
         })
