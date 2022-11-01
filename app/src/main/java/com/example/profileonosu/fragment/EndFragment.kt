@@ -11,6 +11,7 @@ import com.example.profileonosu.R
 import com.example.profileonosu.api.ApiOsu
 import com.example.profileonosu.api.token.GetTokenRequest
 import com.example.profileonosu.api.token.Token
+import com.example.profileonosu.api.userinfo.Scores
 import com.example.profileonosu.api.userinfo.UserInfo
 import com.example.profileonosu.common.Constant.BASE_URL
 import com.example.profileonosu.databinding.FragmentEndBinding
@@ -31,6 +32,7 @@ open class EndFragment : Fragment() {
     var country: String? = null
     var tokenType: String? = null
     var avatarUrl: String? = null
+    var userId: Int? = null
 
 
     private lateinit var binding: FragmentEndBinding
@@ -117,17 +119,41 @@ open class EndFragment : Fragment() {
                 username = response.body()?.username
                 country = response.body()?.countryCode
                 avatarUrl = response.body()?.avatarUrl
+                userId = response.body()?.id
 
                 binding.userName.append(username)
                 binding.performance.append(performancePoints)
                 binding.globalRank.append(globalRank)
                 binding.country.append(country)
-                Picasso.get().load("$avatarUrl").into(binding.avatar);
-
-
+                Picasso.get().load("$avatarUrl").into(binding.avatar)
+                getBestScore()
             }
         })
     }
+
+    private fun getBestScore(){
+        Log.d("getBestScore", "запустилась")
+        osuApi().requestScores(
+            "$tokenType $token","application/json", "$userId"
+        ).enqueue(object: Callback<Scores> {
+            override fun onFailure(call: Call<Scores>, t: Throwable) {
+                Log.e("[err]", t.toString())
+            }
+            override fun onResponse(
+                call: Call<Scores>,
+                response: Response<Scores>
+            ) {
+                var test: Float? = null
+                test = response.body()?.score?.accuracy
+                Log.d(
+                    "xz testim",
+                    "$test"
+                )
+            }
+        })
+    }
+
+
 
 }
 
