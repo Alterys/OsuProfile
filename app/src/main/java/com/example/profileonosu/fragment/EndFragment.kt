@@ -7,12 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.profileonosu.R
 import com.example.profileonosu.api.ApiOsu
 import com.example.profileonosu.api.token.GetTokenRequest
 import com.example.profileonosu.api.token.Token
-import com.example.profileonosu.api.userinfo.Scores
+import com.example.profileonosu.api.userinfo.Score
 import com.example.profileonosu.api.userinfo.UserInfo
 import com.example.profileonosu.common.Constant.BASE_URL
 import com.example.profileonosu.databinding.FragmentEndBinding
@@ -35,9 +34,9 @@ open class EndFragment : Fragment(){
     var avatarUrl: String? = null
     var userId: Int? = null
 
-    private lateinit var adapter: ScoreAdapter
-
     private lateinit var binding: FragmentEndBinding
+
+    private lateinit var adapter: ScoreAdapter
 
     private fun osuApi(): ApiOsu =
         Retrofit.Builder()
@@ -56,22 +55,9 @@ open class EndFragment : Fragment(){
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
             binding = FragmentEndBinding.bind(view)
-            getToken()
-
             adapter = ScoreAdapter()
-
-            val layoutManager = LinearLayoutManager(this)
-            binding.recycler
-
-
-
-
-
-
-
-
-
-
+            binding.recyclerView.adapter = adapter
+            getToken()
             binding.back.setOnClickListener {
                 findNavController().navigate(R.id.action_endFragment_to_startFragment)
             }
@@ -133,19 +119,20 @@ open class EndFragment : Fragment(){
         Log.d("getBestScore", "запустилась")
         osuApi().requestScores(
             "$tokenType $token","application/json", "$userId"
-        ).enqueue(object: Callback<Scores> {
-            override fun onFailure(call: Call<Scores>, t: Throwable) {
+        ).enqueue(object: Callback<List<Score>> {
+            override fun onFailure(call: Call<List<Score>>, t: Throwable) {
                 Log.e("[err]", t.toString())
             }
             override fun onResponse(
-                call: Call<Scores>,
-                response: Response<Scores>
+                call: Call<List<Score>>,
+                response: Response<List<Score>>
             ) {
 
                 Log.d(
                     "Test",
                     response.body().toString()
                 )
+                response.body()?.let { adapter.scores = it }
             }
         })
     }

@@ -2,7 +2,7 @@ package com.example.profileonosu.api
 
 import com.example.profileonosu.api.token.GetTokenRequest
 import com.example.profileonosu.api.token.Token
-import com.example.profileonosu.api.userinfo.Scores
+import com.example.profileonosu.api.userinfo.Score
 import com.example.profileonosu.api.userinfo.UserInfo
 import retrofit2.Call
 import retrofit2.http.*
@@ -26,5 +26,5 @@ interface ApiOsu {
         @Header("Authorization")token: String,
         @Header("Accept")accept: String,
         @Path("id") id: String
-    ):Call<Scores>
+    ): Call<List<Score>>
 }

@@ -4,12 +4,12 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.profileonosu.api.userinfo.Scores
+import com.example.profileonosu.api.userinfo.Score
 import com.example.profileonosu.databinding.ItemScoreBinding
 
 class ScoreAdapter: RecyclerView.Adapter<ScoreAdapter.ScoreViewHolder>() {
 
-    var scores: List<Scores> = emptyList()
+    var scores: List<Score> = emptyList()
         @SuppressLint("NotifyDataSetChanged")
         set(newValue) {
             field = newValue
@@ -34,7 +34,3 @@ class ScoreAdapter: RecyclerView.Adapter<ScoreAdapter.ScoreViewHolder>() {
         val binding: ItemScoreBinding
     ): RecyclerView.ViewHolder(binding.root)
 }
-
-
-
-
