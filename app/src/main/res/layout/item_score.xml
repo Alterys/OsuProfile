@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <!--Текст для дебага делать через tools:text-->
     <TextView
         android:id="@+id/title"
         android:layout_width="0dp"
@@ -17,6 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!--Текст для дебага делать через tools:text-->
     <TextView
         android:id="@+id/artist"
         android:layout_width="match_parent"
@@ -30,6 +32,7 @@
         app:layout_constraintTop_toBottomOf="@+id/title"
         tools:ignore="MissingConstraints" />
 
+    <!--Текст для дебага делать через tools:text-->
     <TextView
         android:id="@+id/mods"
         android:layout_width="wrap_content"
@@ -40,6 +43,7 @@
         app:layout_constraintStart_toEndOf="@+id/difficulty"
         app:layout_constraintTop_toBottomOf="@+id/artist" />
 
+    <!--Текст для дебага делать через tools:text-->
     <TextView
         android:id="@+id/accuracyResult"
         android:layout_width="wrap_content"
@@ -50,6 +54,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mods" />
 
+    <!--Текст для дебага делать через tools:text-->
     <TextView
         android:id="@+id/performancePoint"
         android:layout_width="wrap_content"
@@ -60,6 +65,7 @@
         app:layout_constraintStart_toEndOf="@+id/accuracyResult"
         app:layout_constraintTop_toBottomOf="@+id/mods" />
 
+    <!--Текст для дебага делать через tools:text-->
     <TextView
         android:id="@+id/difficulty"
         android:layout_width="wrap_content"

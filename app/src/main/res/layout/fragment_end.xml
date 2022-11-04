@@ -16,6 +16,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
 
+    <!--Зачем пустая строка в text?-->
     <TextView
         android:id="@+id/userName"
         android:layout_width="wrap_content"
@@ -26,6 +27,7 @@
         app:layout_constraintStart_toEndOf="@+id/userNameView"
         app:layout_constraintTop_toBottomOf="@+id/avatar" />
 
+    <!--Зачем пустая строка в text?-->
     <TextView
         android:id="@+id/performance"
         android:layout_width="wrap_content"
@@ -36,6 +38,7 @@
         app:layout_constraintStart_toEndOf="@+id/performancePointView"
         app:layout_constraintTop_toBottomOf="@+id/userName" />
 
+    <!--Зачем пустая строка в text?-->
     <TextView
         android:id="@+id/globalRank"
         android:layout_width="wrap_content"
@@ -46,6 +49,7 @@
         app:layout_constraintStart_toEndOf="@+id/GlobalRankView"
         app:layout_constraintTop_toBottomOf="@+id/performance" />
 
+    <!--Зачем пустая строка в text?-->
     <TextView
         android:id="@+id/country"
         android:layout_width="wrap_content"
@@ -127,6 +131,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/countryView" />
 
+    <!--Зачем пустая строка в text?-->
     <TextView
         android:id="@+id/hitAccuracy"
         android:layout_width="wrap_content"

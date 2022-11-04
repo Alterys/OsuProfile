@@ -27,7 +27,7 @@ open class StartFragment : Fragment() {
         binding.search.setOnClickListener {
             val bundle = Bundle()
             val name = binding.textName.text
-            bundle.putString("MyArg", name.toString())
+            bundle.putString("MyArg", name.toString()) // Ключ в константы
             findNavController().navigate(R.id.action_startFragment_to_endFragment, bundle)
         }
     }
