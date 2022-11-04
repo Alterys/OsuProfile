@@ -7,22 +7,21 @@ import com.example.profileonosu.api.userinfo.UserInfo
 import retrofit2.Call
 import retrofit2.http.*
 
-
 interface ApiOsu {
     @POST("oauth/token")
-    fun requestToken (
+    fun requestToken(
         @Body getTokenRequest: GetTokenRequest
     ): Call<Token>
 
     @GET("api/v2/users/{user}/osu")
-    fun requestUser (
+    fun requestUser(
         @Header("Authorization")token: String,
         @Header("Accept")accept: String,
         @Path("user") user: String
     ): Call<UserInfo>
 
     @GET("/api/v2/users/{id}/scores/best?limit=50")
-    fun requestScores (
+    fun requestScores(
         @Header("Authorization")token: String,
         @Header("Accept")accept: String,
         @Path("id") id: String

@@ -9,7 +9,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.profileonosu.R
 import com.example.profileonosu.databinding.FragmentStartBinding
 
-
 open class StartFragment : Fragment() {
 
     private lateinit var binding: FragmentStartBinding
@@ -21,6 +20,7 @@ open class StartFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.fragment_start, container, false)
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentStartBinding.bind(view)
@@ -32,16 +32,3 @@ open class StartFragment : Fragment() {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

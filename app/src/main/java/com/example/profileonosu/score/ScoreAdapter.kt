@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.profileonosu.api.userinfo.Score
 import com.example.profileonosu.databinding.ItemScoreBinding
 
-class ScoreAdapter: RecyclerView.Adapter<ScoreAdapter.ScoreViewHolder>() {
+class ScoreAdapter : RecyclerView.Adapter<ScoreAdapter.ScoreViewHolder>() {
 
     var scores: List<Score> = emptyList()
         @SuppressLint("NotifyDataSetChanged")
@@ -24,11 +24,11 @@ class ScoreAdapter: RecyclerView.Adapter<ScoreAdapter.ScoreViewHolder>() {
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ScoreViewHolder, position: Int) {
         val score = scores[position]
-        with(holder.binding){
+        with(holder.binding) {
             title.text = score.beatMapSet.title
             artist.text = score.beatMapSet.artist
             difficulty.text = score.beatMap.difficulty
-            mods.text = if (score.mods.toString() == "[]"){
+            mods.text = if (score.mods.toString() == "[]") {
                 "[NM]"
             } else {
                 score.mods.toString()
@@ -42,5 +42,5 @@ class ScoreAdapter: RecyclerView.Adapter<ScoreAdapter.ScoreViewHolder>() {
 
     class ScoreViewHolder(
         val binding: ItemScoreBinding
-    ): RecyclerView.ViewHolder(binding.root)
+    ) : RecyclerView.ViewHolder(binding.root)
 }

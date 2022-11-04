@@ -23,7 +23,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-open class EndFragment : Fragment(){
+open class EndFragment : Fragment() {
 
     var token: String? = null
     var username: String? = null
@@ -46,30 +46,33 @@ open class EndFragment : Fragment(){
             .build()
             .create(ApiOsu::class.java)
 
-        override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-        ): View? {
-            return inflater.inflate(R.layout.fragment_end, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_end, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = FragmentEndBinding.bind(view)
+        adapter = ScoreAdapter()
+        binding.recyclerView.adapter = adapter
+        getToken()
+        binding.back.setOnClickListener {
+            findNavController().navigate(R.id.action_endFragment_to_startFragment)
         }
-        override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-            super.onViewCreated(view, savedInstanceState)
-            binding = FragmentEndBinding.bind(view)
-            adapter = ScoreAdapter()
-            binding.recyclerView.adapter = adapter
-            getToken()
-            binding.back.setOnClickListener {
-                findNavController().navigate(R.id.action_endFragment_to_startFragment)
-            }
-        }
-    private fun getToken(){
-        osuApi().requestToken(GetTokenRequest(
+    }
+    private fun getToken() {
+        osuApi().requestToken(
+            GetTokenRequest(
             "18123",
             "PMVb6QP4BlfCACeuquYJbq1afbCiGY7Jo6rcrO35",
             "client_credentials",
             "public"
-        )).enqueue(object: Callback<Token> {
+            )
+        ).enqueue(object : Callback<Token> {
             override fun onFailure(call: Call<Token>, t: Throwable) {
                 Log.e("[err]", t.toString())
             }
@@ -77,19 +80,19 @@ open class EndFragment : Fragment(){
                 call: Call<Token>,
                 response: Response<Token>
             ) {
-                token = response.body()?.accessToken?: return
-                tokenType = response.body()?.tokenType?: return
+                token = response.body()?.accessToken ?: return
+                tokenType = response.body()?.tokenType ?: return
                 getUserInfo()
             }
         })
     }
-    private fun getUserInfo(){
+    private fun getUserInfo() {
         val nickname = requireArguments().getString("MyArg")
         osuApi().requestUser(
             "$tokenType $token",
             "application/json",
             "$nickname"
-        ).enqueue(object: Callback<UserInfo> {
+        ).enqueue(object : Callback<UserInfo> {
             override fun onFailure(call: Call<UserInfo>, t: Throwable) {
                 Log.e("[err]", t.toString())
             }
@@ -114,13 +117,13 @@ open class EndFragment : Fragment(){
             }
         })
     }
-    private fun getBestScore(){
+    private fun getBestScore() {
         Log.d("getBestScore", "запустилась")
         osuApi().requestScores(
             "$tokenType $token",
             "application/json",
             "$userId"
-        ).enqueue(object: Callback<List<Score>> {
+        ).enqueue(object : Callback<List<Score>> {
             override fun onFailure(call: Call<List<Score>>, t: Throwable) {
                 Log.e("[err]", t.toString())
             }
