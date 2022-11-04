@@ -20,7 +20,7 @@ interface ApiOsu {
         @Path("user") user: String
     ): Call<UserInfo>
 
-    @GET("/api/v2/users/{id}/scores/best?limit=50")
+    @GET("/api/v2/users/{id}/scores/best?limit=50") // Захардкоженый query параметр в url, добавь аргумент и константу
     fun requestScores(
         @Header("Authorization")token: String,
         @Header("Accept")accept: String,

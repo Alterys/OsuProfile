@@ -25,6 +25,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 open class EndFragment : Fragment() {
 
+    // Это точно все нужно в этой области видимости?
     var token: String? = null
     var username: String? = null
     var performancePoints: String? = null
@@ -39,7 +40,7 @@ open class EndFragment : Fragment() {
 
     private lateinit var adapter: ScoreAdapter
 
-    private fun osuApi(): ApiOsu =
+    private fun osuApi(): ApiOsu = // Зачем каждый раз содавать новый api интерфейс?
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -67,10 +68,10 @@ open class EndFragment : Fragment() {
     private fun getToken() {
         osuApi().requestToken(
             GetTokenRequest(
-            "18123",
-            "PMVb6QP4BlfCACeuquYJbq1afbCiGY7Jo6rcrO35",
-            "client_credentials",
-            "public"
+            "18123", // Почему это все лежит в открытом доступе всем желающим?
+            "PMVb6QP4BlfCACeuquYJbq1afbCiGY7Jo6rcrO35", // И это тоже
+            "client_credentials", // Добавь в константы
+            "public" // Добавь в константы
             )
         ).enqueue(object : Callback<Token> {
             override fun onFailure(call: Call<Token>, t: Throwable) {
@@ -87,11 +88,11 @@ open class EndFragment : Fragment() {
         })
     }
     private fun getUserInfo() {
-        val nickname = requireArguments().getString("MyArg")
+        val nickname = requireArguments().getString("MyArg") // Почему метод получения инфы о пользователе занимается вытаскиванием аргументов?
         osuApi().requestUser(
             "$tokenType $token",
-            "application/json",
-            "$nickname"
+            "application/json", // Добавь в константы
+            "$nickname" // зачем форматированная строка?
         ).enqueue(object : Callback<UserInfo> {
             override fun onFailure(call: Call<UserInfo>, t: Throwable) {
                 Log.e("[err]", t.toString())
@@ -112,7 +113,7 @@ open class EndFragment : Fragment() {
                 binding.hitAccuracy.append("$hitAccuracy%")
                 binding.globalRank.append("#$globalRank")
                 binding.country.append(country)
-                Picasso.get().load("$avatarUrl").into(binding.avatar)
+                Picasso.get().load("$avatarUrl").into(binding.avatar) // зачем форматированная строка?
                 getBestScore()
             }
         })
@@ -121,8 +122,8 @@ open class EndFragment : Fragment() {
         Log.d("getBestScore", "запустилась")
         osuApi().requestScores(
             "$tokenType $token",
-            "application/json",
-            "$userId"
+            "application/json", // Добавь в константы
+            "$userId" // зачем форматированная строка?
         ).enqueue(object : Callback<List<Score>> {
             override fun onFailure(call: Call<List<Score>>, t: Throwable) {
                 Log.e("[err]", t.toString())
