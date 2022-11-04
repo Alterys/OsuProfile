@@ -77,13 +77,7 @@ open class EndFragment : Fragment(){
                 call: Call<Token>,
                 response: Response<Token>
             ) {
-                response.body()?.let {
-                Log.d("Osu Token",
-                    it.accessToken)}
                 token = response.body()?.accessToken?: return
-                response.body()?.let{
-                Log.d("TOKEN TYPE",
-                    it.tokenType)}
                 tokenType = response.body()?.tokenType?: return
                 getUserInfo()
             }
@@ -92,7 +86,9 @@ open class EndFragment : Fragment(){
     private fun getUserInfo(){
         val nickname = requireArguments().getString("MyArg")
         osuApi().requestUser(
-            "$tokenType $token","application/json", "$nickname"
+            "$tokenType $token",
+            "application/json",
+            "$nickname"
         ).enqueue(object: Callback<UserInfo> {
             override fun onFailure(call: Call<UserInfo>, t: Throwable) {
                 Log.e("[err]", t.toString())
@@ -121,7 +117,9 @@ open class EndFragment : Fragment(){
     private fun getBestScore(){
         Log.d("getBestScore", "запустилась")
         osuApi().requestScores(
-            "$tokenType $token","application/json", "$userId"
+            "$tokenType $token",
+            "application/json",
+            "$userId"
         ).enqueue(object: Callback<List<Score>> {
             override fun onFailure(call: Call<List<Score>>, t: Throwable) {
                 Log.e("[err]", t.toString())
@@ -130,11 +128,6 @@ open class EndFragment : Fragment(){
                 call: Call<List<Score>>,
                 response: Response<List<Score>>
             ) {
-
-                Log.d(
-                    "Test",
-                    response.body().toString()
-                )
                 response.body()?.let { adapter.scores = it }
             }
         })
