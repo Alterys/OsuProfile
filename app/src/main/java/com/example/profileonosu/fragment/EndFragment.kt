@@ -28,6 +28,7 @@ open class EndFragment : Fragment(){
     var token: String? = null
     var username: String? = null
     var performancePoints: String? = null
+    var hitAccuracy: String? = null
     var globalRank: String? = null
     var country: String? = null
     var tokenType: String? = null
@@ -102,13 +103,15 @@ open class EndFragment : Fragment(){
             ) {
                 globalRank = response.body()?.statistics?.globalRank
                 performancePoints = response.body()?.statistics?.pp
+                hitAccuracy = response.body()?.statistics?.hitAccuracy
                 username = response.body()?.username
                 country = response.body()?.countryCode
                 avatarUrl = response.body()?.avatarUrl
                 userId = response.body()?.id
                 binding.userName.append(username)
-                binding.performance.append(performancePoints)
-                binding.globalRank.append(globalRank)
+                binding.performance.append(performancePoints + "pp")
+                binding.hitAccuracy.append("$hitAccuracy%")
+                binding.globalRank.append("#$globalRank")
                 binding.country.append(country)
                 Picasso.get().load("$avatarUrl").into(binding.avatar)
                 getBestScore()

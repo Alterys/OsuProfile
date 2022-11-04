@@ -8,11 +8,12 @@
     <string name="performancePointView">Performance Point:</string>
     <string name="countryView">Country:</string>
     <string name="globalRankView">Global Rank:</string>
-    <string name="by">by</string>
+    <string name="accuracy">accuracy</string>
     <string name="title">title</string>
     <string name="artist">artist</string>
     <string name="difficulty">difficulty</string>
     <string name="mods">mods</string>
-    <string name="accuracy">accuracy</string>
+    <string name="accuracyResult">accuracy</string>
     <string name="pp">pp</string>
+    <string name="hitAccuracy">Accuracy:</string>
 </resources>

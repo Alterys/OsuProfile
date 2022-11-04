@@ -21,10 +21,20 @@ class ScoreAdapter: RecyclerView.Adapter<ScoreAdapter.ScoreViewHolder>() {
         return ScoreViewHolder(binding)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ScoreViewHolder, position: Int) {
         val score = scores[position]
         with(holder.binding){
-            performancePoint.text = performancePoint.toString()
+            title.text = score.beatMapSet.title
+            artist.text = score.beatMapSet.artist
+            difficulty.text = score.beatMap.difficulty
+            mods.text = if (score.mods.toString() == "[]"){
+                "[NM]"
+            } else {
+                score.mods.toString()
+            }
+            accuracyResult.text = (score.accuracy * 100).toString() + "%"
+            performancePoint.text = score.performancePoint.toString() + "pp"
         }
     }
 

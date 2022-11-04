@@ -3,76 +3,61 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/Title"
-        android:layout_width="57dp"
-        android:layout_height="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/by"
-        android:layout_width="wrap_content"
+        android:id="@+id/title"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:text="@string/by"
-        app:layout_constraintStart_toEndOf="@+id/Title"
+        android:layout_marginEnd="8dp"
+        android:text="@string/title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/artist"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/artist"
-        app:layout_constraintStart_toEndOf="@+id/by"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/difficulty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="@string/difficulty"
+        android:layout_marginEnd="8dp"
+        android:text="@string/artist"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Title" />
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/mods"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="@string/mods"
-        app:layout_constraintStart_toEndOf="@+id/artist"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/artist" />
 
     <TextView
-        android:id="@+id/accuracy"
+        android:id="@+id/accuracyResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/accuracy"
-        app:layout_constraintStart_toEndOf="@+id/mods"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="8dp"
+        android:text="@string/accuracyResult"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mods" />
 
     <TextView
         android:id="@+id/performancePoint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         android:text="@string/pp"
-        app:layout_constraintStart_toEndOf="@+id/accuracy"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/accuracyResult"
+        app:layout_constraintTop_toBottomOf="@+id/mods" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
