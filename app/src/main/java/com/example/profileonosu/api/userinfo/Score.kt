@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Score(
     @SerializedName("pp") val performancePoint: Float,
-    @SerializedName("accuracy") var accuracy: Float,
+    @SerializedName("accuracy") val accuracy: Float,
     @SerializedName("rank") val rank: String,
     @SerializedName("max_combo") val maxCombo: Int,
     @SerializedName("beatmapset") val beatMapSet: Beatmapset,

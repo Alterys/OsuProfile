@@ -13,7 +13,12 @@ import com.example.profileonosu.api.token.GetTokenRequest
 import com.example.profileonosu.api.token.Token
 import com.example.profileonosu.api.userinfo.Score
 import com.example.profileonosu.api.userinfo.UserInfo
+import com.example.profileonosu.common.Constant.ACCEPT
 import com.example.profileonosu.common.Constant.BASE_URL
+import com.example.profileonosu.common.Constant.GRANT_TYPE
+import com.example.profileonosu.common.Constant.SCOPE
+import com.example.profileonosu.common.Secret.CLIENT_ID
+import com.example.profileonosu.common.Secret.CLIENT_SECRET
 import com.example.profileonosu.databinding.FragmentEndBinding
 import com.example.profileonosu.score.ScoreAdapter
 import com.squareup.picasso.Picasso
@@ -67,10 +72,10 @@ open class EndFragment : Fragment() {
     private fun getToken() {
         osuApi().requestToken(
             GetTokenRequest(
-            "18123",
-            "PMVb6QP4BlfCACeuquYJbq1afbCiGY7Jo6rcrO35",
-            "client_credentials",
-            "public"
+                CLIENT_ID,
+                CLIENT_SECRET,
+                GRANT_TYPE,
+                SCOPE
             )
         ).enqueue(object : Callback<Token> {
             override fun onFailure(call: Call<Token>, t: Throwable) {
@@ -86,11 +91,12 @@ open class EndFragment : Fragment() {
             }
         })
     }
+
     private fun getUserInfo() {
         val nickname = requireArguments().getString("MyArg")
         osuApi().requestUser(
             "$tokenType $token",
-            "application/json",
+            ACCEPT,
             "$nickname"
         ).enqueue(object : Callback<UserInfo> {
             override fun onFailure(call: Call<UserInfo>, t: Throwable) {
@@ -118,10 +124,9 @@ open class EndFragment : Fragment() {
         })
     }
     private fun getBestScore() {
-        Log.d("getBestScore", "запустилась")
         osuApi().requestScores(
             "$tokenType $token",
-            "application/json",
+            ACCEPT,
             "$userId"
         ).enqueue(object : Callback<List<Score>> {
             override fun onFailure(call: Call<List<Score>>, t: Throwable) {
