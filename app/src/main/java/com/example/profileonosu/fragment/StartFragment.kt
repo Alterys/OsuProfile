@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.profileonosu.R
+import com.example.profileonosu.common.Constant.ERROR_01
+import com.example.profileonosu.common.Constant.KEY_NICKNAME
 import com.example.profileonosu.databinding.FragmentStartBinding
 
 open class StartFragment : Fragment() {
@@ -27,8 +29,11 @@ open class StartFragment : Fragment() {
         binding.search.setOnClickListener {
             val bundle = Bundle()
             val name = binding.textName.text
-            bundle.putString("MyArg", name.toString())
-            findNavController().navigate(R.id.action_startFragment_to_endFragment, bundle)
+            bundle.putString(KEY_NICKNAME, name.toString())
+            if (name.isEmpty())
+                binding.error.text = ERROR_01
+            else
+                findNavController().navigate(R.id.action_startFragment_to_endFragment, bundle)
         }
     }
 }

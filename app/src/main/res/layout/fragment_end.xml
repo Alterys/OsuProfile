@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:text=""
+        android:text="@string/username"
         app:layout_constraintStart_toEndOf="@+id/userNameView"
         app:layout_constraintTop_toBottomOf="@+id/avatar" />
 
@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text=""
+        android:text="@string/performance"
         app:layout_constraintStart_toEndOf="@+id/performancePointView"
         app:layout_constraintTop_toBottomOf="@+id/userName" />
 
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text=""
+        android:text="@string/globalRank"
         app:layout_constraintStart_toEndOf="@+id/GlobalRankView"
         app:layout_constraintTop_toBottomOf="@+id/performance" />
 
@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text=""
+        android:text="@string/country"
         app:layout_constraintStart_toEndOf="@+id/countryView"
         app:layout_constraintTop_toBottomOf="@+id/globalRank" />
 
@@ -133,9 +133,21 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text=""
+        android:text="@string/profileAccuracy"
         app:layout_constraintStart_toEndOf="@+id/accuracyView"
         app:layout_constraintTop_toBottomOf="@+id/countryView" />
+
+    <TextView
+        android:id="@+id/error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        tools:text="error"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

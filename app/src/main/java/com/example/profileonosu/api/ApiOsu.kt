@@ -20,10 +20,11 @@ interface ApiOsu {
         @Path("user") user: String
     ): Call<UserInfo>
 
-    @GET("/api/v2/users/{id}/scores/best?limit=50")
+    @GET("/api/v2/users/{id}/scores/best")
     fun requestScores(
-        @Header("Authorization")token: String,
-        @Header("Accept")accept: String,
-        @Path("id") id: String
+        @Header("Authorization") token: String,
+        @Header("Accept") accept: String,
+        @Path("id") id: Int?,
+        @Query("limit") limit: Int
     ): Call<List<Score>>
 }

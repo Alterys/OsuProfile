@@ -1,6 +1,4 @@
 <resources>
-
-
     <string name="search">search</string>
     <string name="textNickname">enter the player\'s nickname</string>
     <string name="back">Back</string>
@@ -12,8 +10,13 @@
     <string name="title">title</string>
     <string name="artist">artist</string>
     <string name="mods">mods</string>
-    <string name="accuracyResult">accuracy</string>
+    <string name="accuracy_result">%s \%</string>
     <string name="pp">pp</string>
     <string name="hitAccuracy">Accuracy:</string>
     <string name="difficulty">difficulty</string>
+    <string name="username">username</string>
+    <string name="country">country</string>
+    <string name="profileAccuracy">accuracy</string>
+    <string name="globalRank">Global Rank</string>
+    <string name="performance">performance</string>
 </resources>

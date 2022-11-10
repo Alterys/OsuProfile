@@ -12,6 +12,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
+        tools:text="title"
         android:text="@string/title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,6 +25,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        tools:text="artist"
         android:text="@string/artist"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,6 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        tools:text="mods"
         android:text="@string/mods"
         app:layout_constraintStart_toEndOf="@+id/difficulty"
         app:layout_constraintTop_toBottomOf="@+id/artist" />
@@ -46,7 +49,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="@string/accuracyResult"
+        tools:text="accuracy"
+        android:text="@string/accuracy_result"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mods" />
 
@@ -56,6 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        tools:text="pp"
         android:text="@string/pp"
         app:layout_constraintStart_toEndOf="@+id/accuracyResult"
         app:layout_constraintTop_toBottomOf="@+id/mods" />
@@ -66,7 +71,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="@string/difficulty"
+        tools:text="@string/difficulty"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/artist" />
 

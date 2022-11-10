@@ -15,7 +15,10 @@ import com.example.profileonosu.api.userinfo.Score
 import com.example.profileonosu.api.userinfo.UserInfo
 import com.example.profileonosu.common.Constant.ACCEPT
 import com.example.profileonosu.common.Constant.BASE_URL
+import com.example.profileonosu.common.Constant.ERROR_O2
 import com.example.profileonosu.common.Constant.GRANT_TYPE
+import com.example.profileonosu.common.Constant.KEY_NICKNAME
+import com.example.profileonosu.common.Constant.LIMIT
 import com.example.profileonosu.common.Constant.SCOPE
 import com.example.profileonosu.common.Secret.CLIENT_ID
 import com.example.profileonosu.common.Secret.CLIENT_SECRET
@@ -31,20 +34,14 @@ import retrofit2.converter.gson.GsonConverterFactory
 open class EndFragment : Fragment() {
 
     var token: String? = null
-    var username: String? = null
-    var performancePoints: String? = null
-    var hitAccuracy: String? = null
-    var globalRank: String? = null
-    var country: String? = null
     var tokenType: String? = null
-    var avatarUrl: String? = null
     var userId: Int? = null
 
     private lateinit var binding: FragmentEndBinding
 
     private lateinit var adapter: ScoreAdapter
 
-    private fun osuApi(): ApiOsu =
+    private val osuApi: ApiOsu =
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -70,7 +67,7 @@ open class EndFragment : Fragment() {
         }
     }
     private fun getToken() {
-        osuApi().requestToken(
+        osuApi.requestToken(
             GetTokenRequest(
                 CLIENT_ID,
                 CLIENT_SECRET,
@@ -93,8 +90,8 @@ open class EndFragment : Fragment() {
     }
 
     private fun getUserInfo() {
-        val nickname = requireArguments().getString("MyArg")
-        osuApi().requestUser(
+        val nickname = requireArguments().getString(KEY_NICKNAME)
+        osuApi.requestUser(
             "$tokenType $token",
             ACCEPT,
             "$nickname"
@@ -106,28 +103,42 @@ open class EndFragment : Fragment() {
                 call: Call<UserInfo>,
                 response: Response<UserInfo>
             ) {
-                globalRank = response.body()?.statistics?.globalRank
-                performancePoints = response.body()?.statistics?.pp
-                hitAccuracy = response.body()?.statistics?.hitAccuracy
-                username = response.body()?.username
-                country = response.body()?.countryCode
-                avatarUrl = response.body()?.avatarUrl
-                userId = response.body()?.id
-                binding.userName.append(username)
-                binding.performance.append(performancePoints + "pp")
-                binding.hitAccuracy.append("$hitAccuracy%")
-                binding.globalRank.append("#$globalRank")
-                binding.country.append(country)
-                Picasso.get().load("$avatarUrl").into(binding.avatar)
-                getBestScore()
+                if (response.body() == null){
+                    binding.error.text = ERROR_O2
+                    binding.userNameView.text = ""
+                    binding.countryView.text = ""
+                    binding.GlobalRankView.text = ""
+                    binding.performancePointView.text = ""
+                    binding.accuracyView.text = ""
+                    binding.userName.text = ""
+                    binding.performance.text = ""
+                    binding.globalRank.text = ""
+                    binding.country.text = ""
+                    binding.hitAccuracy.text = ""
+                } else {
+                    val globalRank = response.body()?.statistics?.globalRank
+                    val performancePoints = response.body()?.statistics?.pp
+                    val hitAccuracy = response.body()?.statistics?.hitAccuracy
+                    val username = response.body()?.username
+                    val country = response.body()?.countryCode
+                    val avatarUrl = response.body()?.avatarUrl
+                    userId = response.body()?.id
+                    binding.userName.text = username
+                    binding.performance.text = performancePoints + "pp"
+                    binding.hitAccuracy.text = ("$hitAccuracy%")
+                    binding.globalRank.text = ("#$globalRank")
+                    binding.country.text = country
+                    Picasso.get().load(avatarUrl).into(binding.avatar)
+                    getBestScore()}
             }
         })
     }
     private fun getBestScore() {
-        osuApi().requestScores(
+        osuApi.requestScores(
             "$tokenType $token",
             ACCEPT,
-            "$userId"
+            userId,
+            LIMIT
         ).enqueue(object : Callback<List<Score>> {
             override fun onFailure(call: Call<List<Score>>, t: Throwable) {
                 Log.e("[err]", t.toString())
