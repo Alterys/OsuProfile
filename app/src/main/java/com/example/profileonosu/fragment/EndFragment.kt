@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.profileonosu.R
@@ -15,7 +16,7 @@ import com.example.profileonosu.api.userinfo.Score
 import com.example.profileonosu.api.userinfo.UserInfo
 import com.example.profileonosu.common.Constant.ACCEPT
 import com.example.profileonosu.common.Constant.BASE_URL
-import com.example.profileonosu.common.Constant.ERROR_O2
+import com.example.profileonosu.common.Constant.ERROR_03
 import com.example.profileonosu.common.Constant.GRANT_TYPE
 import com.example.profileonosu.common.Constant.KEY_NICKNAME
 import com.example.profileonosu.common.Constant.LIMIT
@@ -66,6 +67,7 @@ open class EndFragment : Fragment() {
             findNavController().navigate(R.id.action_endFragment_to_startFragment)
         }
     }
+
     private fun getToken() {
         osuApi.requestToken(
             GetTokenRequest(
@@ -104,7 +106,7 @@ open class EndFragment : Fragment() {
                 response: Response<UserInfo>
             ) {
                 if (response.body() == null){
-                    binding.error.text = ERROR_O2
+                    Toast.makeText(context, ERROR_03, Toast.LENGTH_SHORT).show()
                     binding.userNameView.text = ""
                     binding.countryView.text = ""
                     binding.GlobalRankView.text = ""
@@ -142,6 +144,7 @@ open class EndFragment : Fragment() {
             }
         })
     }
+
     private fun getBestScore() {
         osuApi.requestScores(
             "$tokenType $token",

@@ -7,6 +7,7 @@ object Constant {
     const val SCOPE = "public"
     const val KEY_NICKNAME = "MyArg"
     const val LIMIT = 50
-    const val ERROR_01 = "Error_01 Никнейм не может быть пуст."
-    const val ERROR_O2 = "Error_02 Данный пользователь не найден."
+    const val ERROR_01 = "Error: no connection"
+    const val ERROR_O2 = "Error: nickname string cannot be empty"
+    const val ERROR_03 = "Error: this player is not found"
 }

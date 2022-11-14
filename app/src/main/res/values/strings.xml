@@ -18,4 +18,5 @@
     <string name="profileAccuracy">Accuracy:</string>
     <string name="globalRank">#%s</string>
     <string name="performance"> %spp</string>
+    <string name="avatar">this is the player avatar</string>
 </resources>

@@ -52,4 +52,3 @@ class ScoreAdapter : RecyclerView.Adapter<ScoreAdapter.ScoreViewHolder>() {
         val binding: ItemScoreBinding
     ) : RecyclerView.ViewHolder(binding.root)
 }
-
