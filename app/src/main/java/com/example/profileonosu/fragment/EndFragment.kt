@@ -124,9 +124,18 @@ open class EndFragment : Fragment() {
                     val avatarUrl = response.body()?.avatarUrl
                     userId = response.body()?.id
                     binding.userName.text = username
-                    binding.performance.text = performancePoints + "pp"
-                    binding.hitAccuracy.text = ("$hitAccuracy%")
-                    binding.globalRank.text = ("#$globalRank")
+                    binding.performance.text = getString(
+                        R.string.performance,
+                        performancePoints.toString()
+                    )
+                    binding.hitAccuracy.text = getString(
+                        R.string.hitAccuracy,
+                        hitAccuracy.toString()
+                    )
+                    binding.globalRank.text = getString(
+                        R.string.globalRank,
+                        globalRank.toString()
+                    )
                     binding.country.text = country
                     Picasso.get().load(avatarUrl).into(binding.avatar)
                     getBestScore()}

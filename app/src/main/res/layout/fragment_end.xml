@@ -32,6 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        tools:text="2345pp"
         android:text="@string/performance"
         app:layout_constraintStart_toEndOf="@+id/performancePointView"
         app:layout_constraintTop_toBottomOf="@+id/userName" />
@@ -42,6 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        tools:text="#25789"
         android:text="@string/globalRank"
         app:layout_constraintStart_toEndOf="@+id/GlobalRankView"
         app:layout_constraintTop_toBottomOf="@+id/performance" />
@@ -123,7 +125,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="@string/hitAccuracy"
+        android:text="@string/profileAccuracy"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/countryView" />
 
@@ -133,7 +135,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="@string/profileAccuracy"
+        tools:text="99.5%"
+        android:text="@string/hitAccuracy"
         app:layout_constraintStart_toEndOf="@+id/accuracyView"
         app:layout_constraintTop_toBottomOf="@+id/countryView" />
 

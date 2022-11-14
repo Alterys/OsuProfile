@@ -6,17 +6,16 @@
     <string name="performancePointView">Performance Point:</string>
     <string name="countryView">Country:</string>
     <string name="globalRankView">Global Rank:</string>
-    <string name="accuracy">accuracy</string>
+    <string name="accuracy">%s%%</string>
     <string name="title">title</string>
     <string name="artist">artist</string>
     <string name="mods">mods</string>
-    <string name="accuracy_result">%s \%</string>
-    <string name="pp">pp</string>
-    <string name="hitAccuracy">Accuracy:</string>
+    <string name="pp">%spp</string>
+    <string name="hitAccuracy">%s%%</string>
     <string name="difficulty">difficulty</string>
     <string name="username">username</string>
     <string name="country">country</string>
-    <string name="profileAccuracy">accuracy</string>
-    <string name="globalRank">Global Rank</string>
-    <string name="performance">performance</string>
+    <string name="profileAccuracy">Accuracy:</string>
+    <string name="globalRank">#%s</string>
+    <string name="performance"> %spp</string>
 </resources>

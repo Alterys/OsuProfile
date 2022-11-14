@@ -8,7 +8,6 @@ import com.example.profileonosu.R
 import com.example.profileonosu.api.userinfo.Score
 import com.example.profileonosu.databinding.ItemScoreBinding
 
-
 class ScoreAdapter : RecyclerView.Adapter<ScoreAdapter.ScoreViewHolder>() {
 
     var scores: List<Score> = emptyList()
@@ -24,8 +23,8 @@ class ScoreAdapter : RecyclerView.Adapter<ScoreAdapter.ScoreViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ScoreViewHolder, position: Int) {
+        val context = holder.itemView.context
         val score = scores[position]
-        val ctx = holder.itemView.context
         with(holder.binding) {
             title.text = score.beatMapSet.title
             artist.text = score.beatMapSet.artist
@@ -36,9 +35,14 @@ class ScoreAdapter : RecyclerView.Adapter<ScoreAdapter.ScoreViewHolder>() {
                 score.mods.toString()
 
             }
-            val scoreAccuracy = (score.accuracy * 100).toString()
-            accuracyResult.text = scoreAccuracy + "pp"
-            performancePoint.text = score.performancePoint.toString() + "pp"
+            accuracyResult.text = context.getString(
+                R.string.accuracy,
+                (score.accuracy * 100).toString()
+            )
+            performancePoint.text = context.getString(
+                R.string.performance,
+                score.performancePoint.toString()
+            )
         }
     }
 
